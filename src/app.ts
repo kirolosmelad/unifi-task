@@ -6,6 +6,7 @@ import cors from "cors";
 import helmet from "helmet";
 import tasksRouter from "./routes/tasks.router";
 import { APINotFoundController } from "./controllers/api-not-found.controller";
+import authRouter from "./routes/auth.router";
 
 const app: Application = express();
 
@@ -20,6 +21,7 @@ const mainRouterV1 = Router();
 app.use("/api/v1", mainRouterV1);
 
 mainRouterV1.use("/tasks", tasksRouter);
+mainRouterV1.use("/auth", authRouter);
 
 // Not Found Routes
 app.use("*", APINotFoundController);

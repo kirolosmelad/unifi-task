@@ -4,7 +4,7 @@ export interface UserAttributes extends Document<ObjectId> {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 export interface TaskAttributes extends Document<ObjectId> {

@@ -33,6 +33,7 @@ const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const tasks_router_1 = __importDefault(require("./routes/tasks.router"));
 const api_not_found_controller_1 = require("./controllers/api-not-found.controller");
+const auth_router_1 = __importDefault(require("./routes/auth.router"));
 const app = (0, express_1.default)();
 //#region Global Middlewares
 app.use((0, cors_1.default)());
@@ -43,6 +44,7 @@ app.use(express_1.default.json());
 const mainRouterV1 = (0, express_1.Router)();
 app.use("/api/v1", mainRouterV1);
 mainRouterV1.use("/tasks", tasks_router_1.default);
+mainRouterV1.use("/auth", auth_router_1.default);
 // Not Found Routes
 app.use("*", api_not_found_controller_1.APINotFoundController);
 //#endregion
