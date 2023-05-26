@@ -1,6 +1,6 @@
 import { Error as MongooseError } from "mongoose";
 import { Request, Response, NextFunction } from "express";
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes, getStatusCode } from "http-status-codes";
 import { ErrorResponse } from "../utils/response.class";
 
 // Custom error handler middleware
@@ -11,6 +11,7 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   if (err instanceof ErrorResponse) {
+    return res.status(getStatusCode(err.statusCode)).json(err);
   } else if (err instanceof MongooseError) {
     if (err instanceof MongooseError.ValidationError) {
       // Handle Mongoose validation errors

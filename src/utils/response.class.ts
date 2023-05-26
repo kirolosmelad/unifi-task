@@ -1,9 +1,9 @@
 import { StatusCodes, getReasonPhrase } from "http-status-codes";
 
 export class ErrorResponse {
-  private statusCode: string;
-  private message: string;
-  private err?: any;
+  public statusCode: string;
+  public message: string;
+  public err?: any;
 
   constructor(statusCode: StatusCodes, message?: string, err?: any) {
     this.statusCode = getReasonPhrase(statusCode);

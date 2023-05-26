@@ -8,13 +8,13 @@ const authRouter = Router();
 
 authRouter.post(
   "/signup",
-  validatorMiddleware(createUserSchema),
+  validatorMiddleware<typeof createUserSchema>(createUserSchema),
   authController.signup
 );
 
 authRouter.post(
   "/login",
-  validatorMiddleware(loginSchema),
+  validatorMiddleware<typeof loginSchema>(loginSchema),
   authController.login
 );
 

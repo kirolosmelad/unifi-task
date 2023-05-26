@@ -7,7 +7,10 @@ export const validatorMiddleware =
   <T extends Schema>(schema: T, target: "body" | "params" | "query" = "body") =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validationResult: ValidationResult<T> = schema.validate(req.body);
+      const validationResult: ValidationResult<T> = schema.validate(
+        req[target]
+      );
+
       if (validationResult["error"]) {
         return res
           .status(StatusCodes.BAD_REQUEST)
