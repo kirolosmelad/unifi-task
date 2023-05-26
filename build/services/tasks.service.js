@@ -71,5 +71,17 @@ class TasksService {
             }
         });
     }
+    //#endregion
+    //#region Get All Tasks
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Task_1.Task.find();
+            }
+            catch (err) {
+                throw err;
+            }
+        });
+    }
 }
 exports.tasksService = new TasksService();

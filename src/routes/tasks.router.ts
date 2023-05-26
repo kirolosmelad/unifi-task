@@ -16,6 +16,8 @@ tasksRouter.post(
   tasksController.createTask
 );
 
+tasksRouter.get("/", tasksController.getAll);
+
 tasksRouter.put(
   "/:taskId",
   validatorMiddleware<typeof taskIdParamsSchema>(taskIdParamsSchema, "params"),

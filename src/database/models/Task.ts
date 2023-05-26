@@ -28,4 +28,10 @@ const taskSchema = new Schema<TaskAttributes>({
   },
 });
 
+taskSchema.pre("save", async function (this: TaskAttributes, next: any) {
+  this.createdAt = new Date();
+  this.updatedAt = new Date();
+  next();
+});
+
 export const Task = model<TaskAttributes>("Task", taskSchema);

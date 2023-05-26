@@ -71,5 +71,20 @@ class TasksController {
             }
         });
     }
+    //#endregion
+    //#region Get All Tasks
+    getAll(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const tasks = yield tasks_service_1.tasksService.getAll();
+                return res
+                    .status(http_status_codes_1.StatusCodes.OK)
+                    .json(new response_class_1.SuccessResponse(http_status_codes_1.StatusCodes.OK, tasks));
+            }
+            catch (err) {
+                return next(err);
+            }
+        });
+    }
 }
 exports.tasksController = new TasksController();

@@ -73,6 +73,16 @@ class TasksService {
     }
   }
   //#endregion
+
+  //#region Get All Tasks
+  public async getAll(): Promise<TaskAttributes[]> {
+    try {
+      return await Task.find();
+    } catch (err) {
+      throw err;
+    }
+  }
+  //#endregion
 }
 
 export const tasksService = new TasksService();

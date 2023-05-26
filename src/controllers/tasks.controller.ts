@@ -76,6 +76,19 @@ class TasksController {
     }
   }
   //#endregion
+
+  //#region Get All Tasks
+  public async getAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      const tasks = await tasksService.getAll();
+      return res
+        .status(StatusCodes.OK)
+        .json(new SuccessResponse<TaskAttributes[]>(StatusCodes.OK, tasks));
+    } catch (err) {
+      return next(err);
+    }
+  }
+  //#endregion
 }
 
 export const tasksController = new TasksController();

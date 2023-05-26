@@ -10,6 +10,7 @@ const task_id_params_schema_1 = require("../validation-schemas/Tasks/task-id-par
 const tasksRouter = (0, express_1.Router)();
 tasksRouter.use(auth_middleware_1.authMiddleware);
 tasksRouter.post("/", (0, validator_middleware_1.validatorMiddleware)(create_task_schema_1.createTaskSchema), tasks_controller_1.tasksController.createTask);
+tasksRouter.get("/", tasks_controller_1.tasksController.getAll);
 tasksRouter.put("/:taskId", (0, validator_middleware_1.validatorMiddleware)(task_id_params_schema_1.taskIdParamsSchema, "params"), (0, validator_middleware_1.validatorMiddleware)(update_task_schema_1.updateTaskSchema), tasks_controller_1.tasksController.updateTask);
 tasksRouter.delete("/:taskId", (0, validator_middleware_1.validatorMiddleware)(task_id_params_schema_1.taskIdParamsSchema, "params"), tasks_controller_1.tasksController.deleteTask);
 tasksRouter.get("/:taskId", (0, validator_middleware_1.validatorMiddleware)(task_id_params_schema_1.taskIdParamsSchema, "params"), tasks_controller_1.tasksController.getTaskById);
