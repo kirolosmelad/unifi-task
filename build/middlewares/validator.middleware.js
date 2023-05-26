@@ -14,7 +14,7 @@ const http_status_codes_1 = require("http-status-codes");
 const response_class_1 = require("../utils/response.class");
 const validatorMiddleware = (schema, target = "body") => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const validationResult = schema.validate(req.body);
+        const validationResult = schema.validate(req[target]);
         if (validationResult["error"]) {
             return res
                 .status(http_status_codes_1.StatusCodes.BAD_REQUEST)

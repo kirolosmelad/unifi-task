@@ -7,6 +7,7 @@ const response_class_1 = require("../utils/response.class");
 // Custom error handler middleware
 const errorHandler = (err, req, res, next) => {
     if (err instanceof response_class_1.ErrorResponse) {
+        return res.status((0, http_status_codes_1.getStatusCode)(err.statusCode)).json(err);
     }
     else if (err instanceof mongoose_1.Error) {
         if (err instanceof mongoose_1.Error.ValidationError) {

@@ -3,10 +3,8 @@ import { validatorMiddleware } from "../middlewares/validator.middleware";
 import { createTaskSchema } from "../validation-schemas/Tasks/create-task.schema";
 import { tasksController } from "../controllers/tasks.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
-import {
-  updateTaskParamsSchema,
-  updateTaskSchema,
-} from "../validation-schemas/Tasks/update-task.schema";
+import { updateTaskSchema } from "../validation-schemas/Tasks/update-task.schema";
+import { taskIdParamsSchema } from "../validation-schemas/Tasks/task-id-params.schema";
 
 const tasksRouter = Router();
 
@@ -20,12 +18,21 @@ tasksRouter.post(
 
 tasksRouter.put(
   "/:taskId",
-  validatorMiddleware<typeof updateTaskParamsSchema>(
-    updateTaskParamsSchema,
-    "params"
-  ),
+  validatorMiddleware<typeof taskIdParamsSchema>(taskIdParamsSchema, "params"),
   validatorMiddleware<typeof updateTaskSchema>(updateTaskSchema),
   tasksController.updateTask
+);
+
+tasksRouter.delete(
+  "/:taskId",
+  validatorMiddleware<typeof taskIdParamsSchema>(taskIdParamsSchema, "params"),
+  tasksController.deleteTask
+);
+
+tasksRouter.get(
+  "/:taskId",
+  validatorMiddleware<typeof taskIdParamsSchema>(taskIdParamsSchema, "params"),
+  tasksController.getTaskById
 );
 
 export default tasksRouter;

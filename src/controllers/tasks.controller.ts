@@ -4,10 +4,7 @@ import { tasksService } from "../services/tasks.service";
 import { StatusCodes } from "http-status-codes";
 import { SuccessResponse } from "../utils/response.class";
 import { TaskAttributes } from "../types/interfaces";
-import {
-  UpdateTaskParamsSchema,
-  UpdateTaskSchema,
-} from "../validation-schemas/Tasks/update-task.schema";
+import { UpdateTaskSchema } from "../validation-schemas/Tasks/update-task.schema";
 
 class TasksController {
   //#region Create Task
@@ -47,6 +44,33 @@ class TasksController {
             "Task updated successfully"
           )
         );
+    } catch (err) {
+      return next(err);
+    }
+  }
+  //#endregion
+
+  //#region Delete Task
+  public async deleteTask(req: Request, res: Response, next: NextFunction) {
+    try {
+      await tasksService.deleteTask(req.params.taskId, res.locals.user.id);
+      return res.status(StatusCodes.NO_CONTENT).json();
+    } catch (err) {
+      return next(err);
+    }
+  }
+  //#endregion
+
+  //#region Get Task By Id
+  public async getTaskById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const task = await tasksService.getTaskById(
+        req.params.taskId,
+        res.locals.user.id
+      );
+      return res
+        .status(StatusCodes.OK)
+        .json(new SuccessResponse<TaskAttributes>(StatusCodes.OK, task));
     } catch (err) {
       return next(err);
     }

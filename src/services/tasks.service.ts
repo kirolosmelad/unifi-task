@@ -45,6 +45,34 @@ class TasksService {
     }
   }
   //#endregion
+
+  //#region Delete Task
+  public async deleteTask(taskId: string, userId: string): Promise<void> {
+    try {
+      await Task.deleteOne({ _id: taskId, userId });
+    } catch (err) {
+      throw err;
+    }
+  }
+  //#endregion
+
+  //#region Get Task By Id
+  public async getTaskById(
+    taskId: string,
+    userId: string
+  ): Promise<TaskAttributes> {
+    try {
+      const task = await Task.findOne({ _id: taskId, userId });
+      if (!task) {
+        throw new ErrorResponse(StatusCodes.NOT_FOUND, "Task does not exist");
+      }
+
+      return task;
+    } catch (err) {
+      throw err;
+    }
+  }
+  //#endregion
 }
 
 export const tasksService = new TasksService();

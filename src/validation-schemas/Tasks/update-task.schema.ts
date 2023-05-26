@@ -11,11 +11,3 @@ export const updateTaskSchema = Joi.object<UpdateTaskSchema>({
   description: Joi.string().optional(),
   completed: Joi.boolean().default(false),
 });
-
-export interface UpdateTaskParamsSchema {
-  taskId: string;
-}
-
-export const updateTaskParamsSchema = Joi.object<UpdateTaskParamsSchema>({
-  taskId: Joi.string().required(),
-});
