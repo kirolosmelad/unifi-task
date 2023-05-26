@@ -7,6 +7,7 @@ import helmet from "helmet";
 import tasksRouter from "./routes/tasks.router";
 import { APINotFoundController } from "./controllers/api-not-found.controller";
 import authRouter from "./routes/auth.router";
+import errorHandler from "./controllers/error.handler";
 
 const app: Application = express();
 
@@ -26,5 +27,8 @@ mainRouterV1.use("/auth", authRouter);
 // Not Found Routes
 app.use("*", APINotFoundController);
 //#endregion
+
+// Global Error handler
+app.use(errorHandler);
 
 export default app;
