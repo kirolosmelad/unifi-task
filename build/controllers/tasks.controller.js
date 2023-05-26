@@ -18,7 +18,7 @@ class TasksController {
     createTask(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const task = yield tasks_service_1.tasksService.createTask(req.body);
+                const task = yield tasks_service_1.tasksService.createTask(res.locals.user.id, req.body);
                 return res
                     .status(http_status_codes_1.StatusCodes.CREATED)
                     .json(new response_class_1.SuccessResponse(http_status_codes_1.StatusCodes.CREATED, task));

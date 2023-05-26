@@ -13,10 +13,10 @@ exports.tasksService = void 0;
 const Task_1 = require("../database/models/Task");
 class TasksService {
     //#region Create Task
-    createTask(taskData) {
+    createTask(userId, taskData) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const task = new Task_1.Task(taskData);
+                const task = new Task_1.Task(Object.assign(Object.assign({}, taskData), { userId }));
                 return yield task.save();
             }
             catch (err) {

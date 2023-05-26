@@ -13,7 +13,7 @@ class TasksController {
     next: NextFunction
   ) {
     try {
-      const task = await tasksService.createTask(req.body);
+      const task = await tasksService.createTask(res.locals.user.id, req.body);
       return res
         .status(StatusCodes.CREATED)
         .json(new SuccessResponse<TaskAttributes>(StatusCodes.CREATED, task));

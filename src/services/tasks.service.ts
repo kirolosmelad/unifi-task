@@ -5,9 +5,15 @@ import { TaskAttributes } from "../types/interfaces";
 
 class TasksService {
   //#region Create Task
-  public async createTask(taskData: CreateTaskSchema): Promise<TaskAttributes> {
+  public async createTask(
+    userId: string,
+    taskData: CreateTaskSchema
+  ): Promise<TaskAttributes> {
     try {
-      const task: HydratedDocument<TaskAttributes> = new Task(taskData);
+      const task: HydratedDocument<TaskAttributes> = new Task({
+        ...taskData,
+        userId,
+      });
       return await task.save();
     } catch (err) {
       throw err;
